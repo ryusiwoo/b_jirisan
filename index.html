@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>진한 봄 지리산</title>
+  <!-- CSS 파일 연결 -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase SDK 로드 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</head>
+<body>
+  <!-- 타이틀 영역 -->
+  <div class="title">
+    <div class="title-line-1">진한봄 지리산</div>
+    <div class="title-line-2">그리고 우리들</div>
+  </div>
+
+  <!-- 리뷰 섹션 -->
+  <div class="review-section">
+    <div class="review-title">Review</div>
+    <div class="speech-bubble">
+      여기는 산행의 추억과 감동이 담긴 공간입니다.<br>
+      함께했던 순간을 떠올리며 새로운 산행 계획을 세워보세요!
+    </div>
+  </div>
+
+  <!-- 갤러리 섹션 -->
+  <div class="gallery-container">
+    <a href="https://drive.google.com/drive/folders/1InufbIjpY5iQ-m8h7dNsT5jNbzSo9I8h" target="_blank">
+      <img src="https://i.imgur.com/TdWmdUX.jpeg" alt="사진 1">
+    </a>
+    <a href="https://drive.google.com/drive/folders/1InufbIjpY5iQ-m8h7dNsT5jNbzSo9I8h" target="_blank">
+      <img src="https://i.imgur.com/JJYLE67.jpeg" alt="사진 2">
+    </a>
+    <a href="https://drive.google.com/drive/folders/1InufbIjpY5iQ-m8h7dNsT5jNbzSo9I8h" target="_blank">
+      <img src="https://i.imgur.com/BSGlhry.jpeg" alt="사진 3">
+    </a>
+    <a href="https://drive.google.com/drive/folders/1InufbIjpY5iQ-m8h7dNsT5jNbzSo9I8h" target="_blank">
+      <img src="https://i.imgur.com/PUiJW27.png" alt="사진 4">
+    </a>
+  </div>
+
+  <!-- 버튼 영역 -->
+<div class="buttons">
+  <a href="https://brilliant-stardust-0ecc28.netlify.app/" target="_blank" class="like-button">⬅️ 이전 산행</a>
+  
+  <div class="like-wrapper">
+    <button id="likeButtonRight" class="like-button">👍 좋아요</button>
+    <div id="likeCount" class="like-count">0</div>
+  </div>
+  
+  <a href="https://naver.me/FG7qpdiP" target="_blank" class="like-button">💰 회비보기</a>
+</div>
+
+
+  <!-- Firebase 스크립트 -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAejvBpHRHrOoLUbCaSHWl3_GvXQ1k10kQ",
+      authDomain: "jirisan-8a0a9.firebaseapp.com",
+      databaseURL: "https://jirisan-8a0a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "jirisan-8a0a9",
+      storageBucket: "jirisan-8a0a9.appspot.com",
+      messagingSenderId: "623824081076",
+      appId: "1:623824081076:web:52c5e5638c17736aaa87e1",
+      measurementId: "G-Z4NCE0XM9C"
+    };
+
+    // Firebase 초기화
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // 좋아요 카운트 실시간 업데이트
+    database.ref("likes").on("value", function(snapshot) {
+      const count = snapshot.val() || 0;
+      document.getElementById("likeCount").textContent = count;
+    });
+
+    // 좋아요 버튼 클릭 이벤트
+    document.getElementById("likeButtonRight").addEventListener("click", function() {
+      database.ref("likes").once("value").then(function(snapshot) {
+        let count = snapshot.val() || 0;
+        count++;
+        database.ref("likes").set(count);
+      });
+    });
+  </script>
+</body>
+</html>

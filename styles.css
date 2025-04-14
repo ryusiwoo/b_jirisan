@@ -1,0 +1,136 @@
+/* 공통 레이아웃 스타일 */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+}
+
+/* 타이틀 영역 */
+.title {
+  position: relative;
+  text-align: center;
+  background-image: url('https://i.imgur.com/88GxLU2.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  width: 100%;
+}
+.title-line-1 {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 25px;
+  font-weight: bold;
+  color: #f7fafc;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+.title-line-2 {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #f7fafc;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* 갤러리 섹션 */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+  width: 90%;
+}
+.gallery-container img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.gallery-container img:hover {
+  transform: scale(1.05);
+}
+
+/* 리뷰 섹션 (말풍선 스타일) */
+.review-section {
+  width: 90%;
+  margin: 20px 0;
+}
+.review-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.speech-bubble {
+  position: relative;
+  background: #f1f1f1;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.speech-bubble:after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 15px 15px 0;
+  border-style: solid;
+  border-color: #f1f1f1 transparent;
+}
+
+/* 버튼 영역 */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; /* 버튼 상단 정렬 */
+  gap: 10px;
+}
+.like-button {
+  font-size: 14px;
+  padding: 8px 12px;
+  background-color: #ffcc00;
+  border-radius: 10px;
+  border: 1px solid #999;
+  color: #333;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+.like-button:hover {
+  transform: scale(1.05);
+}
+/* 좋아요 버튼과 카운트를 세로 배치 */
+.like-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.like-count {
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 5px;
+  text-align: center;
+}
