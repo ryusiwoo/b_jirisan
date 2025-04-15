@@ -1,14 +1,13 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyAejvBpHRHrOoLUbCaSHWl3_GvXQ1k10kQ",
-    authDomain: "jirisan-8a0a9.firebaseapp.com",
-    databaseURL: "https://jirisan-8a0a9-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "jirisan-8a0a9",
-    storageBucket: "jirisan-8a0a9.firebasestorage.app",
-    messagingSenderId: "623824081076",
-    appId: "1:623824081076:web:68a519252583e490aa87e1",
-    measurementId: "G-7MHTPJZ8H5"
-  };
-
+  apiKey: "AIzaSyAejvBpHRHrOoLUbCaSHWl3_GvXQ1k10kQ",
+  authDomain: "jirisan-8a0a9.firebaseapp.com",
+  databaseURL: "https://jirisan-8a0a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "jirisan-8a0a9",
+  storageBucket: "jirisan-8a0a9.appspot.com",
+  messagingSenderId: "623824081076",
+  appId: "1:623824081076:web:52c5e5638c17736aaa87e1",
+  measurementId: "G-Z4NCE0XM9C"
+};
 
 // Firebase 초기화
 firebase.initializeApp(firebaseConfig);
@@ -52,5 +51,25 @@ database.ref("comments").on("value", function(snapshot) {
     commentItem.className = "comment-item";
     commentItem.textContent = comment.text;
     commentsList.appendChild(commentItem);
+  });
+});
+
+// Firebase에서 갤러리 이미지 불러오기
+database.ref("gallery").on("value", function(snapshot) {
+  const galleryContainer = document.getElementById("gallery-container");
+  galleryContainer.innerHTML = ""; // 기존 갤러리 초기화
+
+  snapshot.forEach(function(childSnapshot) {
+    const image = childSnapshot.val();
+    const imageElement = document.createElement("a");
+    imageElement.href = image.link;
+    imageElement.target = "_blank";
+
+    const imgElement = document.createElement("img");
+    imgElement.src = image.imageUrl;
+    imgElement.alt = image.altText;
+    imageElement.appendChild(imgElement);
+
+    galleryContainer.appendChild(imageElement);
   });
 });
