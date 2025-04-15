@@ -1,17 +1,32 @@
-// Firebase 설정 - Firebase Console에서 제공된 값을 입력하세요.
 const firebaseConfig = {
-  apiKey: "yourAPIKey",
-  authDomain: "your-project-id.firebaseapp.com",
-  databaseURL: "https://your-project-id.firebaseio.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project-id.appspot.com",
-  messagingSenderId: "yourSenderId",
-  appId: "yourAppId"
+  apiKey: "AIzaSyAejvBpHRHrOoLUbCaSHWl3_GvXQ1k10kQ",
+  authDomain: "jirisan-8a0a9.firebaseapp.com",
+  databaseURL: "https://jirisan-8a0a9-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "jirisan-8a0a9",
+  storageBucket: "jirisan-8a0a9.appspot.com",
+  messagingSenderId: "623824081076",
+  appId: "1:623824081076:web:52c5e5638c17736aaa87e1",
+  measurementId: "G-Z4NCE0XM9C"
 };
 
 // Firebase 초기화
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+
+// 좋아요 카운트 실시간 업데이트
+database.ref("likes").on("value", function(snapshot) {
+  const count = snapshot.val() || 0;
+  document.getElementById("likeCount").textContent = count;
+});
+
+// 좋아요 버튼 클릭 이벤트
+document.getElementById("likeButtonRight").addEventListener("click", function() {
+  database.ref("likes").once("value").then(function(snapshot) {
+    let count = snapshot.val() || 0;
+    count++;
+    database.ref("likes").set(count);
+  });
+});
 
 // 댓글 저장 로직
 document.getElementById("submitCommentButton").addEventListener("click", function() {
